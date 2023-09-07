@@ -1,0 +1,15 @@
+body {
+    display: flex;
+    justify-content: center; /* Center the content horizontally */
+    align-items: flex-start; /* Align the content to the top */
+    height: 100vh; /* Set the height of the body to the full viewport height */
+    margin: 0; /* Remove default body margin */
+    background: linear-gradient(to top, #8A3547, #2b2f77, #141852);
+    margin: 0; /* Remove default body margin for a full-width background */
+    padding: 0; /* Remove default body padding for a full-height background */
+  }
+
+#engineDiv {
+    margin-top: 10px;
+    transform-origin: center top;
+}
