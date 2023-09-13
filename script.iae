@@ -1,0 +1,188 @@
+<InteractiveAudioAdventure title="Test Mansion">
+  <Variables><!-- You need to create a child element for each variable you plan on using in the game and initialize their values here -->
+    <variable id="key" value="0"/>
+    <variable id="sword" value="0"/>
+    <variable id="shield" value="0"/>
+    <variable id="deadDragon" value="0"/>
+  </Variables>
+  <Scenes><!-- The game is divided into scenes, and each scene is divided into nodes -->
+    <scene id="Title"><!-- The first scene must have an attribute named "id" with a value of "Title" -->
+      <node id="default"><!-- Nodes usually have child prompts and choices. This node has neither. Instead it has a goto. Nodes can only have gotos if there are no choices.-->
+        <goto sceneID="Credits"/><!-- This goto takes us to the scene with the id "Credits". Since it doesn't have a nodeID attribute, it will go to the node with the id "default". -->
+      </node>
+    </scene>
+    <scene id="Credits">Credits
+      <node id="default"><!-- This node has multiple prompts. They will be played in order. -->
+        <prompt file="credits1.mp3">Interactive Audio Engine proof of concept.</prompt>
+        <prompt file="credits2.mp3">Created by BladePoint.</prompt>
+        <goto sceneID="Warning"/><!-- Since there are no choices, it will automatically goto the "Warning" scene and "default" node after playing the prompts.-->
+      </node>
+    </scene>
+    <scene id="Warning">Warning
+      <node id="default">
+        <prompt file="warning.mp3">Warning, this is unfinished beta software.</prompt>
+        <goto sceneID="Intro"/>
+      </node>
+    </scene>
+    <scene id="Intro">Introduction
+      <node id="default">
+        <prompt file="intro.mp3">Listen to the prompt and then make a choice.</prompt>
+        <goto sceneID="Front"/>
+      </node>
+    </scene>
+    <scene id="Front">Front of the Mansion
+      <node id="default">
+        <prompt file="front.mp3">There is a large mansion in front of you.</prompt>
+        <prompt file="perhapsKey.mp3">Perhaps the key you found can open the front door.<!-- This prompt has a child condition. You may have multiple conditions. All child conditions must be true in order for the parent to be displayed. -->
+          <condition varID="key" operator="==" value="1"/><!-- In this case, the variable "key" must have a value equal to 1 in order for this condition to be true. -->
+        </prompt>
+        <choice>Enter the front door.<!-- This choice has multiple goto children. The first one that is true will be used. -->
+          <goto nodeID="enter">
+            <condition varID="key" operator="==" value="1"/>
+          </goto>
+          <goto nodeID="locked"/>
+        </choice>
+        <choice id="behind">Go behind the mansion.
+          <goto sceneID="Rear"/>
+        </choice>
+      </node>
+      <node id="locked">
+        <prompt file="locked.mp3">The door is locked.</prompt>
+        <choice sceneID="Front" nodeID="default" choiceID="behind"/> <!-- This is a copy of the choice found in the referenced scene and node with the referenced id. -->
+      </node>
+      <node id="enter">
+        <prompt file="enter.mp3">You unlock the door and go inside.</prompt>
+        <goto sceneID="Foyer"/>
+      </node>
+    </scene>
+    <scene id="Rear">Rear of the Mansion
+      <node id="default">
+        <prompt file="rear.mp3">Behind the mansion there are some bushes.</prompt>
+        <choice id="examineBushes">Examine the bushes.
+          <goto nodeID="bushes"/>
+        </choice>
+        <choice id="front">Go to the front of the mansion.
+          <goto sceneID="Front"/>
+        </choice>
+      </node>
+      <node id="bushes">
+        <prompt file="bushesKey.mp3">You find a key in the bushes.
+          <condition varID="key" operator="==" value="0"/>
+          <modifyVar varID="key" command="setVar" value="1"/><!-- The variable will be changed when this prompt plays. -->
+        </prompt>
+        <prompt file="bushesNothing.mp3">There is nothing else in the bushes.
+          <condition varID="key" operator="==" value="1"/>
+        </prompt>
+        <choice sceneID="Rear" nodeID="default" choiceID="examineBushes"/>
+        <choice sceneID="Rear" nodeID="default" choiceID="front"/>
+      </node>
+    </scene>
+    <scene id="Foyer">Mansion Foyer
+      <node id="default">
+        <prompt file="foyer1.mp3">In the foyer there is a large, sleeping dragon guarding a giant ruby.</prompt>
+        <prompt file="foyer2.mp3">A door leads to the west wing of the mansion, and another door leads to the east wing.
+          <condition varID="sword" operator="==" value="0"/>
+          <condition varID="shield" operator="==" value="0"/>
+        </prompt>
+        <choice>Kill the dragon.
+          <condition varID="sword" operator="==" value="1"/>
+          <goto nodeID="kill"/>
+        </choice>
+        <choice>Take the ruby.
+          <goto nodeID="ruby"/>
+        </choice>
+        <choice>Go to the west wing.
+          <goto nodeID="west"/>
+        </choice>
+        <choice>Go to the east wing.
+          <goto nodeID="east"/>
+        </choice>
+      </node>
+      <node id="kill">
+        <prompt id="killLose" file="killLose.mp3">As you stab the dragon, it breathes fire and burns you to death.
+          <condition id="killLose" varID="shield" operator="==" value="0"/>
+        </prompt>
+        <prompt id="killWin" file="killWin.mp3">You protect yourself with your shield and kill the dragon with your sword.
+          <condition id="killWin" varID="shield" operator="==" value="1"/>
+          <modifyVar varID="deadDragon" command="setVar" value="1"/>
+        </prompt>
+        <choice>Try again
+          <condition sceneID="Foyer" nodeID="kill" promptID="killLose" conditionID="killLose"/>
+          <goto sceneID="Front" gameOver="true"/>
+        </choice>
+        <choice>Claim the ruby.
+          <condition sceneID="Foyer" nodeID="kill" promptID="killWin" conditionID="killWin"/>
+          <goto nodeID="ruby"/>
+        </choice>
+      </node>
+      <node id="ruby">
+        <prompt id="rubyLose" file="rubyLose.mp3">The dragon wakes up and eats you alive.
+          <condition id="rubyLose" varID="deadDragon" operator="==" value="0"/>
+        </prompt>
+        <prompt id="rubyWin" file="rubyWin.mp3">You take the ruby. Congratulations, you win the game!
+          <condition id="rubyWin" varID="deadDragon" operator="==" value="1"/>
+        </prompt>
+        <choice>Try again
+          <condition sceneID="Foyer" nodeID="ruby" promptID="rubyLose" conditionID="rubyLose"/>
+          <goto sceneID="Front" gameOver="true"/>
+        </choice>
+        <choice>Play again
+          <condition sceneID="Foyer" nodeID="ruby" promptID="rubyWin" conditionID="rubyWin"/>
+          <goto sceneID="Front" gameOver="true"/>
+        </choice>
+      </node>
+      <node id="west">
+        <prompt file="west.mp3">Quietly you make your way to the west wing.</prompt>
+        <goto sceneID="West"/>
+      </node>
+      <node id="east">
+        <prompt file="east.mp3">Quietly you make your way to the east wing.</prompt>
+        <goto sceneID="East"/>
+      </node>
+    </scene>
+    <scene id="West">West Wing
+      <node id="default">
+        <prompt id="sword1" file="sword1.mp3">There is a magnificent sword on display.
+          <condition id="sword1" varID="sword" operator="==" value="0"/>
+        </prompt>
+        <prompt file="nothing.mp3">There is nothing here.
+          <condition varID="sword" operator="==" value="1"/>
+        </prompt>
+        <choice>Take the sword
+          <condition sceneID="West" nodeID="default" promptID="sword1" conditionID="sword1"/>
+          <goto nodeID="take"/>
+        </choice>
+        <choice id="return">Return to the foyer
+          <goto sceneID="Foyer"/>
+        </choice>
+      </node>
+      <node id="take">
+        <prompt file="sword2.mp3">You take the sword.
+          <modifyVar varID="sword" command="setVar" value="1"/>
+        </prompt>
+        <choice sceneID="West" nodeID="default" choiceID="return"/>
+      </node>
+    </scene>
+    <scene id="East">East Wing
+      <node id="default">
+        <prompt id="shield1" file="shield1.mp3">There is a magnificent shield on display.
+          <condition id="shield1" varID="shield" operator="==" value="0"/>
+        </prompt>
+        <prompt file="nothing.mp3">There is nothing here.
+          <condition varID="shield" operator="==" value="1"/>
+        </prompt>
+        <choice>Take the shield
+          <condition sceneID="East" nodeID="default" promptID="shield1" conditionID="shield1"/>
+          <goto nodeID="take"/>
+        </choice>
+        <choice sceneID="West" nodeID="default" choiceID="return"/>
+      </node>
+      <node id="take">
+        <prompt file="shield2.mp3">You take the shield.
+          <modifyVar varID="shield" command="setVar" value="1"/>
+        </prompt>
+        <choice sceneID="West" nodeID="default" choiceID="return"/>
+      </node>
+    </scene>
+  </Scenes>
+</InteractiveAudioAdventure>
