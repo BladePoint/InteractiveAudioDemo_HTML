@@ -1,14 +1,14 @@
 <InteractiveAudioAdventure title="Test Mansion">
-  <Variables><!-- You need to create a child element for each variable you plan on using in the game and initialize their values here -->
-    <variable id="key" value="0"/>
-    <variable id="sword" value="0"/>
-    <variable id="shield" value="0"/>
-    <variable id="deadDragon" value="0"/>
+  <Variables><!-- Create a variable child node for each variable you plan on using in the game and initialize their values here. -->
+    <var id="key" value="0"/>
+    <var id="sword" value="0"/>
+    <var id="shield" value="0"/>
+    <var id="deadDragon" value="0"/>
   </Variables>
-  <Scenes><!-- The game is divided into scenes, and each scene is divided into nodes -->
-    <scene id="Title"><!-- The first scene must have an attribute named "id" with a value of "Title" -->
-      <node id="default"><!-- Nodes usually have child prompts and choices. This node has neither. Instead it has a goto. Nodes can only have gotos if there are no choices.-->
-        <goto sceneID="Credits"/><!-- This goto takes us to the scene with the id "Credits". Since it doesn't have a nodeID attribute, it will go to the node with the id "default". -->
+  <Scenes><!-- The game is divided into scenes, and each scene is divided into nodes. Scenes and nodes should have unique "id" attributes. -->
+    <scene id="Title"><!-- The first scene must have an "id" attribute with a value of "Title" -->
+      <node id="default"><!-- Nodes usually have prompts and choices. This node has neither. Instead it has a goto. Nodes can only have gotos if there are no choices.-->
+        <goto sceneID="Credits"/><!-- This goto takes us to the scene with the id "Credits". Since there is no nodeID attribute, it will go to the node with the id "default". -->
       </node>
     </scene>
     <scene id="Credits">Credits
