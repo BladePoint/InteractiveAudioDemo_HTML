@@ -1,21 +1,24 @@
 <InteractiveAudioAdventure title="Test Mansion">
-  <Variables><!-- Create a variable child node for each variable you plan on using in the game and initialize their values here. -->
+  <Variables><!-- Create a <var> child for each variable you plan on using in the game and initialize its value here. -->
     <var id="key" value="0"/>
     <var id="sword" value="0"/>
     <var id="shield" value="0"/>
     <var id="deadDragon" value="0"/>
   </Variables>
-  <Scenes><!-- The game is divided into scenes, and each scene is divided into nodes. Scenes and nodes should have unique "id" attributes. -->
-    <scene id="Title"><!-- The first scene must have an "id" attribute with a value of "Title" -->
-      <node id="default"><!-- Nodes usually have prompts and choices. This node has neither. Instead it has a goto. Nodes can only have gotos if there are no choices.-->
-        <goto sceneID="Credits"/><!-- This goto takes us to the scene with the id "Credits". Since there is no nodeID attribute, it will go to the node with the id "default". -->
+  <Scenes><!-- The game is divided into <scene>s. They should have unique "id" attributes. -->
+    <scene id="Title"><!-- The first <scene> must have an "id" attribute with a value of "Title" -->
+      <node id="default"><!-- Each <scene> is divided into <node>s. They should have unique "id"s within their <scene>. -->
+        <!-- Usually <node>s have <prompt>s and <choice>s. This <node> has neither. -->
+        <!-- Instead it has a <goto>. The <node> may only have <goto>s if there are no <choice>s. -->
+        <!-- This <goto> takes us to the <scene> with the id "Credits" by using the "sceneID" attribute. -->
+        <goto sceneID="Credits"/><!-- Since there is no "nodeID" attribute, it will go to the node with the "id" value of "default". -->
       </node>
     </scene>
     <scene id="Credits">Credits
-      <node id="default"><!-- This node has multiple prompts. They will be played in order. -->
+      <node id="default"><!-- This node has multiple <prompt>s. They will be played in order. -->
         <prompt file="credits1.mp3">Interactive Audio Engine proof of concept.</prompt>
         <prompt file="credits2.mp3">Created by BladePoint.</prompt>
-        <goto sceneID="Warning"/><!-- Since there are no choices, it will automatically goto the "Warning" scene and "default" node after playing the prompts.-->
+        <goto sceneID="Warning"/><!-- Since this <node> has no <choice>s, it will automatically use the <goto>. -->
       </node>
     </scene>
     <scene id="Warning">Warning
@@ -36,7 +39,8 @@
         <prompt file="perhapsKey.mp3">Perhaps the key you found can open the front door.<!-- This prompt has a child condition. You may have multiple conditions. All child conditions must be true in order for the parent to be displayed. -->
           <condition varID="key" operator="==" value="1"/><!-- In this case, the variable "key" must have a value equal to 1 in order for this condition to be true. -->
         </prompt>
-        <choice>Enter the front door.<!-- This choice has multiple goto children. The first one that is true will be used. -->
+        <!-- This choice has multiple goto children. The first one that is true will be used. -->
+        <choice>Enter the front door.
           <goto nodeID="enter">
             <condition varID="key" operator="==" value="1"/>
           </goto>
