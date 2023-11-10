@@ -3,3 +3,5 @@
 server.js
 #VS Code
 InteractiveAudioDemo_HTML.code-workspace
+#TypeScript
+tsconfig.json
