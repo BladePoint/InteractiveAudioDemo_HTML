@@ -1,7 +1,10 @@
+#VS Code
+InteractiveAudioDemo_HTML.code-workspace
+#NPM
+package.json
+package-lock.json
+#ESLint
+.eslintrc.js
 #Express
 /node_modules/
 server.js
-#VS Code
-InteractiveAudioDemo_HTML.code-workspace
-#TypeScript
-tsconfig.json
