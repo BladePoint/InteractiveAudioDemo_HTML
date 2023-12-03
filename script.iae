@@ -1,4 +1,4 @@
-<InteractiveAudioAdventure title="Test Mansion">
+<InteractiveAudioAdventure title="Demo Mansion">
   <Variables><!-- Create a <var> child for each variable you plan on using in the game and initialize its value here. -->
     <var id="key" value="0"/>
     <var id="sword" value="0"/>
@@ -65,7 +65,7 @@
         <choice id="examineBushes">Examine the bushes.
           <goto nodeID="bushes"/>
         </choice>
-        <choice id="front">Go to the front of the mansion.
+        <choice id="front">Return to the front.
           <goto sceneID="Front"/>
         </choice>
       </node>
@@ -110,7 +110,7 @@
           <condition id="killWin" varID="shield" operator="==" value="1"/>
           <modifyVar varID="deadDragon" command="setVar" value="1"/>
         </prompt>
-        <choice>Try again
+        <choice>Try again.
           <condition sceneID="Foyer" nodeID="kill" promptID="killLose" conditionID="killLose"/>
           <goto sceneID="Front" gameOver="true"/>
         </choice>
@@ -130,7 +130,7 @@
           <condition sceneID="Foyer" nodeID="ruby" promptID="rubyLose" conditionID="rubyLose"/>
           <goto sceneID="Front" gameOver="true"/>
         </choice>
-        <choice>Play again
+        <choice>Play again.
           <condition sceneID="Foyer" nodeID="ruby" promptID="rubyWin" conditionID="rubyWin"/>
           <goto sceneID="Front" gameOver="true"/>
         </choice>
