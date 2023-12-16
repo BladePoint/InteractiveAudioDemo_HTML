@@ -1,5 +1,5 @@
 <InteractiveAudioAdventure title="Demo Mansion">
-  <Variables><!-- Create a <var> child for each variable you plan on using in the game and initialize its value here. -->
+  <Variables><!-- Create a child <var> for each variable you plan on using in the game and initialize its value here. -->
     <var id="key" value="0"/>
     <var id="sword" value="0"/>
     <var id="shield" value="0"/>
@@ -7,11 +7,11 @@
   </Variables>
   <Scenes><!-- The game is divided into <scene>s. They should have unique "id" attributes. -->
     <scene id="Title"><!-- The first <scene> must have an "id" attribute with a value of "Title" -->
-      <node id="default"><!-- Each <scene> is divided into <node>s. They should have unique "id"s within their <scene>. -->
-        <!-- Usually <node>s have <prompt>s and <choice>s. This <node> has neither. -->
-        <!-- Instead it has a <goto>. The <node> may only have <goto>s if there are no <choice>s. -->
+      <node id="default"><!-- Each <scene> is divided into <node>s, which should have unique "id"s within their <scene>. -->
+        <!-- Usually <node>s have <prompt>s and <choice>s. This one has neither. -->
+        <!-- Instead it has a <goto>. A <node> may only have <goto>s if there are no <choice>s. -->
         <!-- This <goto> takes us to the <scene> with the id "Credits" by using the "sceneID" attribute. -->
-        <goto sceneID="Credits"/><!-- Since there is no "nodeID" attribute, it will go to the node with the "id" value of "default". -->
+        <goto sceneID="Credits"/><!-- Since the <goto> has no "nodeID" attribute, it will go to the node with the "id" value of "default". -->
       </node>
     </scene>
     <scene id="Credits">Credits
@@ -36,11 +36,11 @@
     <scene id="Front">Front of the Mansion
       <node id="default">
         <prompt file="front.mp3">There is a large mansion in front of you.</prompt>
-        <prompt file="perhapsKey.mp3">Perhaps the key you found can open the front door.<!-- This prompt has a child condition. You may have multiple conditions. All child conditions must be true in order for the parent to be displayed. -->
+        <prompt file="perhapsKey.mp3">Perhaps the key you found can open the front door.<!-- This <prompt> has a <condition>. There may be multiple <condition>s, all of which must be true in order for the parent to be true. -->
           <condition varID="key" operator="==" value="1"/><!-- In this case, the variable "key" must have a value equal to 1 in order for this condition to be true. -->
         </prompt>
-        <!-- This choice has multiple goto children. The first one that is true will be used. -->
-        <choice>Enter the front door.
+        <!-- This choice has multiple goto children. The first one that is true will be executed. -->
+        <choice>Enter the front door.<!-- If the player has the key, go to node "enter", otherwise go to node "locked". -->
           <goto nodeID="enter">
             <condition varID="key" operator="==" value="1"/>
           </goto>
@@ -71,8 +71,8 @@
       </node>
       <node id="bushes">
         <prompt file="bushesKey.mp3">You find a key in the bushes.
-          <condition varID="key" operator="==" value="0"/>
-          <modifyVar varID="key" command="setVar" value="1"/><!-- The variable will be changed when this prompt plays. -->
+          <condition varID="key" operator="==" value="0"/><!-- If the player already has the key, this will be false and not be played. -->
+          <modifyVar varID="key" command="setVar" value="1"/><!-- The "key" variable will be set to 1 if this prompt plays. -->
         </prompt>
         <prompt file="bushesNothing.mp3">There is nothing else in the bushes.
           <condition varID="key" operator="==" value="1"/>
@@ -126,7 +126,7 @@
         <prompt id="rubyWin" file="rubyWin.mp3">You take the ruby. Congratulations, you win the game!
           <condition id="rubyWin" varID="deadDragon" operator="==" value="1"/>
         </prompt>
-        <choice>Try again
+        <choice>Try again.
           <condition sceneID="Foyer" nodeID="ruby" promptID="rubyLose" conditionID="rubyLose"/>
           <goto sceneID="Front" gameOver="true"/>
         </choice>
