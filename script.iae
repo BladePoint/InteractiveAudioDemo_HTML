@@ -1,4 +1,11 @@
 <InteractiveAudioAdventure title="Demo Mansion">
+  <Info><!-- Below the CDATA line, write a description that will appear in the info box. The info box's height will scale with the text. -->
+    <![CDATA[
+<div style="font-size:24px; color:#336699; text-align:center; margin:0; padding:0">DEMO MANSION</div>
+<div style="font-size:18px; color:#000000; margin-top:4px; margin-bottom:4px">Here you can put a description of the Adventure. You may use HTML code to style the text. This Adventure is just a simple demonstration of what the Interactive Audio Engine is capable of.</div>
+<div style="font-size:10px; color:#444444">The fine print goes here. Disclaimers and licenses and such. But don't make it so small nobody can read it.</div>
+    ]]>
+  </Info>
   <Variables><!-- Create a child <var> for each variable you plan on using in the game and initialize its value here. -->
     <var id="key" value="0"/>
     <var id="sword" value="0"/>
@@ -156,7 +163,7 @@
           <condition sceneID="West" nodeID="default" promptID="sword1" conditionID="sword1"/>
           <goto nodeID="take"/>
         </choice>
-        <choice id="return">Return to the foyer
+        <choice id="return">Return to the foyer.
           <goto sceneID="Foyer"/>
         </choice>
       </node>
@@ -175,7 +182,7 @@
         <prompt file="nothing.mp3">There is nothing here.
           <condition varID="shield" operator="==" value="1"/>
         </prompt>
-        <choice>Take the shield
+        <choice>Take the shield.
           <condition sceneID="East" nodeID="default" promptID="shield1" conditionID="shield1"/>
           <goto nodeID="take"/>
         </choice>

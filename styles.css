@@ -1,3 +1,7 @@
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
 body {
   margin: 0; /* Remove default body margin for a full-width background */
   padding: 0; /* Remove default body padding for a full-height background */
