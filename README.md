@@ -1,5 +1,5 @@
 # InteractiveAudioDemo_HTML
-This is a web-based HTML demo of the Interactive Audio Engine implemented in JavaScript. You can see it in action here:
+This is a web-based HTML demo of the Interactive Audio Engine implemented in JavaScript. See it in action here:  
 https://www.newgrounds.com/portal/view/913019  
 https://bladepoint.heliohost.us/demo
 
