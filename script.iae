@@ -13,7 +13,7 @@
     <var id="deadDragon" value="0"/>
   </Variables>
   <Scenes><!-- The game is divided into <scene>s. They should have unique "id" attributes. -->
-    <scene id="Title"><!-- The first <scene> must have an "id" attribute with a value of "Title" -->
+    <scene id="Title">Title<!-- The first <scene> must have an "id" attribute with a value of "Title" -->
       <node id="default"><!-- Each <scene> is divided into <node>s, which should have unique "id"s within their <scene>. -->
         <!-- Usually <node>s have <prompt>s and <choice>s. This one has neither. -->
         <!-- Instead it has a <goto>. A <node> may only have <goto>s if there are no <choice>s. -->
