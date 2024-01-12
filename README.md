@@ -4,8 +4,8 @@ https://www.newgrounds.com/portal/view/913019
 https://bladepoint.github.io/InteractiveAudioDemo_HTML/  
 https://bladepoint.heliohost.us/demo
 
-Download a zip of version 1.0.1 including all of the dependencies here:  
-dropbox  
+Download the latest version from the DropBox link near the upper right corner:  
+https://github.com/BladePoint/InteractiveAudioDemo_HTML.git  
 
 You can replace the audio and script with your own content to make your own adventure! Unfortunately, if you attempt to view it locally off your hard drive, your browser will probably give you CORS errors and it won't work. Your browser's CORS policy prevents loading certain types of content from a different domain for security reasons. Strangely, it considers local JavaScript files to be another domain even if everything is just on your hard drive. You will have to do one of the following to get around this:
 1. Disable Cross-Origin Restrictions in your browser, then view the HTML. This is not recommended for security reasons.
