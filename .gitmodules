@@ -1,0 +1,9 @@
+[submodule "JavaScript/InteractiveAudio_JS"]
+	path = JavaScript/InteractiveAudio_JS
+	url = https://github.com/BladePoint/InteractiveAudio_JS.git
+[submodule "JavaScript/UserInterface_JS"]
+	path = JavaScript/UserInterface_JS
+	url = https://github.com/BladePoint/UserInterface_JS.git
+[submodule "JavaScript/Utilities_JS"]
+	path = JavaScript/Utilities_JS
+	url = https://github.com/BladePoint/Utilities_JS.git
