@@ -36,4 +36,4 @@ Near the beginning, a script should have a `<Variables>` element with `<var>` ch
  A `<condition>` tests the value of a `<var>` using an operator against a number. The `<condition>` is considered true if the `<var>`'s value passes this test. If a parent has multiple `<condition>`s, all of them must be true for the parent to be considered true. A parent with no `<condition>`s is automatically considered true.
 
 ## 8. `<modifyVar>`
-A `<modifyVar>` is used to change the value of one of the game variables. A `<modifyVar>` may be the child of a `<prompt>`. When the player reaches the `<prompt>`s parent node, if that `<prompt>` is true, the <modifyVar> will be executed.
+A `<modifyVar>` is used to change the value of a `<var>`. A `<modifyVar>` may be the child of a `<prompt>`. When the player reaches the `<prompt>`s parent node, if that `<prompt>` is true, the <modifyVar> will be executed.
