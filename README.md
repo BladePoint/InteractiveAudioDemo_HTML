@@ -18,7 +18,7 @@ The script.iae file controls the flow of audio that is played and the choices th
 The `<scene>` element is used to logically divide different parts of your adventure. They are not actual destination points that can be traversed. That type of element is the `<node>`, which `<scene>`s are a collection of.
 
 ## 2. `<node>`
-The `<node>` element is a branching point in the flow of logic. Typically a `<node>` has `<prompt>`s and `<choice>`s.
+The `<node>` element is a branching point in the flow of logic. Typically a `<node>` has `<prompt>`s and `<choice>`s. The `<prompt>`s are played and then the `<choice>`s are displayed. The flow stops until the player makes a decision.
 
 ## 3. `<prompt>`
 A `<prompt>` is an audio file that is to be played when the player arrives at a `<node>`. If a `<node>` has several `<prompt>`s, they will be played in succession. If a `<prompt>` has child `<condition>`s, they all must be true in order for the `<prompt>` to be included in the play list. Otherwise the `<prompt>` will be ignored.
